@@ -90,17 +90,7 @@ Aplicación desde cero para Grado 10° de Diseño y Desarrollo Web.
 
 # Acceso docente
 
-La clave de demostración incluida en `script.js` es:
 
-`Aula10-2026`
-
-ANTES de publicar para estudiantes, cambia:
-
-```js
-const TEACHER_KEY="Aula10-2026";
-```
-
-por una clave propia.
 
 IMPORTANTE: esta clave en JavaScript no es seguridad real. Para una plataforma institucional se debe usar autenticación de servidor/Supabase Auth.
 
