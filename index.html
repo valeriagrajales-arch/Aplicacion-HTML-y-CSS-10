@@ -1,0 +1,783 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Aula Web 10°: aprendizaje interactivo de HTML5, CSS y Flexbox.">
+  <title>Aula Web 10° · HTML + CSS + Flexbox</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body><div class="v10-free-banner">✨ Modo aprendizaje libre: explora cualquier módulo, paso o actividad en cualquier orden. Los quizzes y retos son opcionales.</div>
+<div id="toast" class="toast"></div>
+
+<!-- LOGIN -->
+<section id="authView" class="auth-view">
+  <div class="auth-art">
+    <div class="web-mascot" aria-hidden="true">
+      <div class="mascot-bubble">¡Vamos a crear! ✨</div>
+      <div class="mascot-head"><span class="eye"></span><span class="eye"></span><span class="smile"></span></div>
+      <div class="mascot-body"><span class="screen">&lt;/&gt;</span></div>
+      <div class="mascot-arm left"></div><div class="mascot-arm right"></div>
+    </div>
+    <div class="orb orb1"></div><div class="orb orb2"></div>
+    <div class="auth-code">
+      <span>&lt;main&gt;</span>
+      <span class="indent">&lt;h1&gt;Mi página&lt;/h1&gt;</span>
+      <span class="indent">&lt;section&gt;</span>
+      <span class="indent2">display: flex;</span>
+      <span class="indent">&lt;/section&gt;</span>
+      <span>&lt;/main&gt;</span>
+    </div>
+  </div>
+  <div class="auth-panel">
+    <div class="brand"><div class="brand-mark">⌘</div><div><b>AULA WEB</b><small>Diseño y Desarrollo Web · 10°</small></div></div>
+    <div class="auth-copy">
+      <span class="eyebrow">PLATAFORMA DE APRENDIZAJE</span>
+      <h1>Construye tu<br><em>primera web moderna.</em></h1>
+      <p>Repasa HTML5, aprende CSS, domina Flexbox y termina creando un proyecto web propio.</p>
+    </div>
+    <div class="auth-tabs"><button class="auth-tab active" data-auth="student">Estudiante</button><button class="auth-tab" data-auth="teacher">Docente</button></div>
+    <div id="studentAuth" class="auth-form">
+      <label>Nombre completo<input id="studentName" placeholder="Ej. Laura Gómez"></label>
+      <label>Grupo<input id="studentGroup" placeholder="Ej. 10-A"></label>
+      <button id="studentEnter" class="btn primary wide">🚀 Entrar a mi aula</button>
+      <small>Tu progreso se guardará en este navegador. Si se configura Supabase, también quedará registrado para el docente.</small>
+    </div>
+    <div id="teacherAuth" class="auth-form hidden">
+      <label>Clave docente<input id="teacherKey" type="password" placeholder="Clave configurada por el docente"></label>
+      <button id="teacherEnter" class="btn dark wide">👩‍🏫 Abrir panel docente</button>
+      <small>La clave inicial está indicada en README.md y debe cambiarse antes de publicar.</small>
+    </div>
+  </div>
+</section>
+
+<!-- APP -->
+<div id="appView" class="hidden">
+<header class="topbar">
+  <div class="brand"><div class="brand-mark">⌘</div><div><b>AULA WEB</b><small id="roleLabel">10° · Diseño y Desarrollo Web</small></div></div>
+  <div class="topbar-right"><span id="userNameTop"></span><button id="logoutBtn" class="icon-btn">Salir</button></div>
+</header>
+
+<div class="app-layout">
+<aside class="sidebar">
+  <div id="studentIdentity" class="identity"><div class="avatar">10°</div><div><b id="identityName">Estudiante</b><small id="identityGroup">Grupo</small></div></div>
+  <div id="teacherIdentity" class="identity hidden"><div class="avatar teacher">👩‍🏫</div><div><b>Panel docente</b><small>Seguimiento de 10°</small></div></div>
+  <nav id="studentNav">
+    <button class="side-nav active" data-page="home">⌂ <span>Mi inicio</span></button>
+    <button class="side-nav" data-page="html">01 <span>HTML5</span></button><button class="side-nav" data-page="vscode">🧰 <span>Crear archivos en VS Code</span></button>
+    <button class="side-nav" data-page="css">02 <span>CSS</span></button>
+    <button class="side-nav" data-page="flex">03 <span>Flexbox</span></button>
+    <button class="side-nav" data-page="goodPractices">04 <span>Buenas prácticas</span></button>
+    <button class="side-nav" data-page="webExamples">◎ <span>Web reales</span></button>
+    <button class="side-nav" data-page="practice">05 <span>Laboratorio</span></button>
+    <button class="side-nav" data-page="project">06 <span>Proyecto final</span></button>
+    <button class="side-nav" data-page="htmlInteractive">🧩 Interactivo <span>HTML</span></button>
+<button class="side-nav" data-page="result">★ <span>Mi avance</span></button>
+  </nav>
+  <nav id="teacherNav" class="hidden">
+    <button class="side-nav active" data-page="teacherDash">⌂ <span>Dashboard</span></button>
+    <button class="side-nav" data-page="teacherStudents">♙ <span>Estudiantes</span></button>
+    <button class="side-nav" data-page="teacherReports">▥ <span>Reportes</span></button>
+    <button class="side-nav" data-page="teacherSettings">⚙ <span>Configuración</span></button>
+  </nav></aside>
+
+<main>
+<!-- STUDENT HOME -->
+<section id="home" class="page active"><div class="v6-path">
+<span class="v6-chip html">🔥 01 HTML</span><span class="v6-chip css">🎨 02 CSS</span><span class="v6-chip flex">📦 03 Flexbox</span><span class="v6-chip">🧪 04 Laboratorio</span><span class="v6-chip">🏆 05 Proyecto</span>
+</div>
+  <div class="home-hero">
+    <div class="hero-copy">
+      <span class="eyebrow">🚀 MISIÓN: CONSTRUIR PARA LA WEB</span>
+      <h2>De etiquetas a una <span>web que se mueve.</span></h2>
+      <p>Aprende HTML5, domina CSS y conviértete en protagonista de Flexbox. Cada reto desbloquea una parte de tu proyecto final.</p>
+      <div class="hero-actions"><button class="btn primary" data-go="flex">⚡ Ir a Flexbox</button><button class="btn ghost" data-go="project">🎨 Ver proyecto final</button></div>
+      <div class="hero-mini-stats"><div><b>HTML</b><small>estructura</small></div><div><b>CSS</b><small>estilo</small></div><div class="featured"><b>FLEX</b><small>layout</small></div></div>
+    </div>
+    <div class="hero-character" aria-hidden="true">
+      <div class="floating-code code-one">&lt;section&gt;</div>
+      <div class="floating-code code-two">display: flex;</div>
+      <div class="character">
+        <div class="char-hair"></div><div class="char-face"><i></i><i></i><b></b></div>
+        <div class="char-shirt"><span>CSS</span></div>
+        <div class="char-leg l"></div><div class="char-leg r"></div>
+      </div>
+      <div class="hero-platform"></div>
+    </div>
+  </div>
+  <div class="learning-path-banner">
+    <div><span class="eyebrow">RUTA DE APRENDIZAJE</span><h3>Primero entiendes. Después experimentas. Finalmente construyes.</h3></div>
+    <div class="path-chips"><span>01 HTML</span><b>→</b><span>02 CSS</span><b>→</b><span class="hot">03 FLEXBOX</span><b>→</b><span>04 PROYECTO</span></div>
+  </div>
+  <div class="hero">
+    <div><span class="eyebrow">RUTA DE APRENDIZAJE · GRADO 10</span><h2>De una etiqueta HTML a una <em>web moderna.</em></h2><p>Tu meta es comprender la estructura, darle estilo y organizarla con Flexbox hasta construir tu propio sitio.</p><button class="btn primary" data-go="html">Comenzar ruta →</button></div>
+    <div class="hero-art"><div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><div class="browser-body"><div class="skel title"></div><div class="skel text"></div><div class="skel text short"></div><div class="skel cards"><i></i><i></i><i></i></div></div></div></div>
+  </div>
+  <div class="metric-grid">
+    <div class="metric"><span>📚</span><b id="homeProgress">0%</b><small>Ruta completada</small></div>
+    <div class="metric"><span>🏆</span><b id="homeScore">—</b><small>Puntaje</small></div>
+    <div class="metric"><span>🧩</span><b id="homeModules">0/6</b><small>Módulos</small></div>
+    <div class="metric"><span>💻</span><b id="homeProject">0%</b><small>Proyecto</small></div>
+  </div>
+  <div class="section-title"><div><span class="eyebrow">TU RUTA</span><h3>Aprende en orden</h3></div></div>
+  <div class="route-grid">
+    <button class="route-card" data-go="html"><span>01</span><b>HTML5</b><small>Estructura y contenido</small><em id="routeHtml">Pendiente</em></button>
+    <button class="route-card" data-go="css"><span>02</span><b>CSS</b><small>Diseño y presentación</small><em id="routeCss">Pendiente</em></button>
+    <button class="route-card" data-go="flex"><span>03</span><b>Flexbox</b><small>Organización y layout</small><em id="routeFlex">Pendiente</em></button>
+    <button class="route-card" data-go="goodPractices"><span>04</span><b>Buenas prácticas</b><small>Escribe código profesional</small><em id="routeGoodPractices">Pendiente</em></button>
+    <button class="route-card" data-go="practice"><span>05</span><b>Prácticas</b><small>Comprueba lo aprendido</small><em id="routePractice">Pendiente</em></button>
+    <button class="route-card" data-go="project"><span>06</span><b>Proyecto</b><small>Construye tu web</small><em id="routeProject">Pendiente</em></button>
+    <button class="route-card" data-go="result"><span>★</span><b>Resultado</b><small>Tu evidencia</small><em>Ver avance</em></button>
+  </div>
+</section>
+
+<!-- HTML -->
+<section id="html" class="page"><div style="margin:12px 0;padding:12px 15px;border-radius:12px;background:#fff4ed;border:1px solid #ffd4bf;color:#8a3b16;font-weight:700">🚀 V7 · Navegación libre: puedes abrir cualquier tema de HTML sin aprobar primero el quiz.</div>
+  <div class="heading"><span class="eyebrow">MÓDULO 01 · HTML5</span><h2>La estructura de una página web</h2><p>HTML describe qué elementos existen y cómo se organiza el contenido. CSS se encargará después de su apariencia.</p></div>
+  <div class="callout" style="margin-top:14px">💡 <b>Explora sin miedo:</b> todos los temas están disponibles desde el inicio. Lee, prueba los ejemplos, modifica el código y usa los quizzes para comprobar si realmente lo entendiste.</div>
+  <div class="lesson-banner"><div><b>IDEA CLAVE</b><h3>HTML es la estructura, no la decoración.</h3><p>Piensa en una casa: HTML define habitaciones, puertas y espacios; CSS define colores, materiales y distribución visual.</p></div><div class="house">⌂</div></div>
+  <div class="module-stepper" id="htmlStepper">
+    <div class="step-header"><b>Ruta paso a paso</b><span id="htmlStepProgress">Paso 1 de 7</span></div>
+    <div class="step-buttons">
+      <button class="step-button active" data-step-index="0">Fundamentos</button>
+      <button class="step-button" data-step-index="1">Semántica</button>
+      <button class="step-button" data-step-index="2">Contenido</button>
+      <button class="step-button" data-step-index="3">Multimedia</button>
+      <button class="step-button" data-step-index="4">Accesibilidad</button>
+      <button class="step-button" data-step-index="5">Formularios</button>
+      <button class="step-button" data-step-index="6">Tablas</button>
+    </div>
+    <div class="step-panel"><p id="htmlStepInfo">Comienza por entender cómo se construye el documento HTML, desde <code>doctype</code> hasta <code>body</code>.</p></div>
+    <div class="step-actions"><button class="btn small" id="htmlPrevStep">Anterior</button><button class="btn small primary" id="htmlNextStep">Siguiente</button></div>
+  </div>
+  <div id="html-basic" class="tab-content active">
+    <div class="content-grid">
+      <article class="info-panel"><span class="eyebrow">01 · DOCUMENTO</span><h3>La estructura mínima</h3><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Mi página&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  Contenido visible
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p><strong>DOCTYPE</strong> indica al navegador que trabajaremos con HTML5. <strong>head</strong> contiene metadatos, la hoja de estilos y el título. <strong>body</strong> contiene todo lo que el usuario ve.</p></article>
+      <article class="info-panel"><span class="eyebrow">02 · META</span><h3>Metadatos importantes</h3><p>Los metadatos no se muestran como texto, pero son clave para el navegador y para dispositivos móviles.</p><ul><li><code>charset</code>: codificación de caracteres.</li><li><code>viewport</code>: hace que la página sea responsive.</li><li><code>link rel="stylesheet"</code>: conecta el CSS externo.</li></ul></article>
+    </div>
+    <article class="info-panel"><span class="eyebrow">03 · CONTENIDO</span><h3>¿Qué va en head y qué va en body?</h3><div class="sorting-demo"><div class="dropzone" data-zone="head">HEAD <small>metadatos, estilos, título</small></div><div class="dropzone" data-zone="body">BODY <small>texto, imágenes, secciones</small></div></div><p>Piensa si el elemento es visible o si sirve para configurar la página.</p><div id="sortItems" class="sort-items"><button data-target="head">Título de pestaña</button><button data-target="body">Título principal</button><button data-target="body">Imagen</button><button data-target="head">Codificación UTF-8</button></div><div id="sortMsg" class="message"></div></article>
+    <article class="info-panel html-interactive"><h3>Interactivo: elige una etiqueta HTML</h3><div class="html-preview-actions"><button class="html-tag-btn active" data-tag="header">header</button><button class="html-tag-btn" data-tag="main">main</button><button class="html-tag-btn" data-tag="img">img</button><button class="html-tag-btn" data-tag="a">a</button><button class="html-tag-btn" data-tag="form">form</button></div><div id="htmlTagPreview" class="html-preview"><h4>header</h4><div class="html-live-render"></div><pre><code>&lt;header&gt;
+  &lt;h1&gt;Mi título&lt;/h1&gt;
+&lt;/header&gt;</code></pre><p>El elemento <code>header</code> contiene el encabezado de una sección o página y es uno de los bloques principales del documento.</p></div></article>
+    <div class="callout">🧠 <b>Regla rápida:</b> si el usuario lo ve en la página, normalmente estará relacionado con <code>body</code>. Si es información para el navegador, normalmente estará en <code>head</code>.</div>
+  </div>
+  <div id="html-semantic" class="tab-content"><div class="semantic-map"><div class="sem header">HEADER <small>marca · título</small></div><div class="sem nav">NAV <small>navegación</small></div><div class="sem main"><div class="sem section">SECTION <small>bloque temático</small><div class="sem article">ARTICLE <small>contenido independiente</small></div></div></div><div class="sem footer">FOOTER <small>información final</small></div></div><div class="two-col"><article class="info-panel"><h3>¿Por qué semántica?</h3><p>Las etiquetas semánticas describen el propósito del contenido. Mejoran la organización del código, accesibilidad y comprensión del documento.</p><ul><li><code>header</code> → encabezado.</li><li><code>nav</code> → navegación.</li><li><code>main</code> → contenido principal.</li><li><code>section</code> → sección temática.</li><li><code>article</code> → contenido independiente.</li><li><code>footer</code> → pie de página.</li><li><code>aside</code> → contenido secundario.</li><li><code>figure</code> + <code>figcaption</code> → imágenes con leyenda.</li></ul></article><article class="info-panel"><h3>Ejemplo real</h3><pre><code>&lt;body&gt;
+  &lt;header&gt;&lt;h1&gt;Mi tienda&lt;/h1&gt;&lt;/header&gt;
+  &lt;nav&gt;&lt;a href="#"&gt;Inicio&lt;/a&gt;&lt;/nav&gt;
+  &lt;main&gt;
+    &lt;section&gt;
+      &lt;article&gt;&lt;h2&gt;Producto&lt;/h2&gt;&lt;p&gt;Descripción&lt;/p&gt;&lt;/article&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+  &lt;footer&gt;Contacto&lt;/footer&gt;
+&lt;/body&gt;</code></pre><p>La semántica facilita que el navegador, las personas y los motores de búsqueda entiendan tu página.</p></article></div></div>
+  <div id="html-content" class="tab-content"><div class="real-application">
+  <span class="eyebrow">APLICACIÓN REAL · CONTENIDO</span>
+  <h3>¿Para qué sirven los textos y las listas en una página real?</h3>
+  <div class="real-application-grid">
+    <div><b>📰 Encabezados</b><p><code>h1</code>, <code>h2</code> y <code>h3</code> organizan una noticia, una tienda o una guía. Por ejemplo: <strong>Tienda → Categoría → Producto.</strong></p></div>
+    <div><b>🛒 Listas</b><p><code>ul</code> sirve cuando el orden no importa, como las características de un celular. <code>ol</code> sirve cuando el orden sí importa, como los pasos para comprar.</p></div>
+    <div><b>✍️ Formato</b><p><code>strong</code> destaca información importante; <code>em</code> marca énfasis. No los uses solo para hacer letras grandes: para eso está CSS.</p></div>
+    <div><b>🔗 Enlaces</b><p><code>a</code> conecta al usuario con otra página, un documento, una sección o una acción. Es fundamental en menús y botones de navegación.</p></div>
+  </div>
+  <div class="format-tags">
+  <h4>Etiquetas de formato que debes reconocer</h4>
+  <div class="format-tags-grid">
+    <span><code>&lt;strong&gt;</code><b>Importancia</b></span>
+    <span><code>&lt;em&gt;</code><i>Énfasis</i></span>
+    <span><code>&lt;mark&gt;</code><mark>Resaltado</mark></span>
+    <span><code>&lt;small&gt;</code><small>Nota secundaria</small></span>
+    <span><code>&lt;del&gt;</code><del>Texto eliminado</del></span>
+    <span><code>&lt;ins&gt;</code><ins>Texto agregado</ins></span>
+    <span><code>&lt;sub&gt;</code>H<sub>2</sub>O</span>
+    <span><code>&lt;sup&gt;</code>x<sup>2</sup></span>
+    <span><code>&lt;code&gt;</code><code>display:flex</code></span>
+  </div>
+  <p><strong>Idea clave:</strong> estas etiquetas aportan significado al contenido. El tamaño, color, espacio y apariencia deben controlarse principalmente con CSS.</p>
+</div>
+<div class="list-types">
+  <h4>Tipos de listas y su uso real</h4>
+  <div><b>ul</b><p>Cuando el orden no importa: ingredientes, características, menú de navegación.</p></div>
+  <div><b>ol</b><p>Cuando el orden importa: instrucciones, pasos de registro, ranking.</p></div>
+  <div><b>dl</b><p>Para términos y sus descripciones: glosarios, preguntas frecuentes o fichas técnicas.</p></div>
+</div>
+<div class="format-demo">
+    <h4>Ejemplo: página de un restaurante</h4>
+    <p><strong>Plato recomendado:</strong> Hamburguesa artesanal con <em>ingredientes frescos</em>.</p>
+    <ul><li>Pan artesanal</li><li>Carne 150 g</li><li>Queso cheddar</li></ul>
+    <ol><li>Elige tu plato</li><li>Selecciona la bebida</li><li>Confirma el pedido</li></ol>
+    <a href="#html-content">Ver menú completo →</a>
+  </div>
+</div>
+<div class="content-grid"><article class="info-panel"><h3>Contenido textual</h3><p>Los encabezados van de <code>h1</code> a <code>h6</code>. Usa <code>h1</code> para el título principal y organiza los niveles de manera lógica.</p><div class="demo-heading"><h1>h1 · Título principal</h1><h2>h2 · Sección</h2><h3>h3 · Subtema</h3><p>p · Párrafo de contenido.</p></div></article><article class="info-panel"><h3>Listas, enlaces y énfasis</h3><pre><code>&lt;ul&gt;
+  &lt;li&gt;HTML&lt;/li&gt;
+  &lt;li&gt;CSS&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;a href="https://ejemplo.com"&gt;Visitar sitio&lt;/a&gt;
+&lt;p&gt;Este texto es &lt;strong&gt;importante&lt;/strong&gt; y este es &lt;em&gt;énfasis&lt;/em&gt;.&lt;/p&gt;</code></pre><p><code>ul</code> crea listas sin orden; <code>ol</code> crea listas numeradas. Usa <code>strong</code> para importancia y <code>em</code> para énfasis.</p></article></div>
+  <div class="callout">💡 <b>Consejo:</b> evita usar encabezados sólo por estilo. Usa CSS para cambiar el tamaño visual y deja que el HTML exprese la jerarquía del contenido.</div>
+</div>
+  <div id="html-media" class="tab-content"><div class="content-grid"><article class="info-panel"><h3>Imágenes</h3><pre><code>&lt;img src="tenis.jpg"
+     alt="Tenis deportivos"
+     width="600"
+     height="400"&gt;</code></pre><p><strong>alt</strong> describe la imagen cuando no puede visualizarse y ayuda a la accesibilidad. Usar <code>width</code>/<code>height</code> mejora el rendimiento.</p></article><article class="info-panel"><h3>Video, audio e iframe</h3><pre><code>&lt;video controls width="100%"&gt;
+  &lt;source src="video.mp4" type="video/mp4"&gt;
+&lt;/video&gt;
+&lt;audio controls&gt;
+  &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+&lt;/audio&gt;
+&lt;iframe src="https://ejemplo.com" title="Contenido externo"&gt;&lt;/iframe&gt;</code></pre><p>Usa multimedia de forma responsable y respeta derechos de autor. Añade atributos como <code>title</code> y <code>controls</code> para mejorar la experiencia.</p></article></div><div class="quiz-inline"><b>Detecta el error</b><p><code>&lt;img src="foto.jpg"&gt;</code></p><button class="choice" data-correct="true" data-msg="Correcto: falta el atributo alt.">Falta alt</button><button class="choice" data-msg="No. src sí está presente.">Falta src</button><div class="message"></div></div></div>
+  <div id="html-accessibility" class="tab-content"><div class="content-grid"><article class="info-panel"><h3>Accesibilidad básica</h3><p>Una página accesible permite que más personas la usen, incluyendo quienes usan lectores de pantalla o navegadores con teclado.</p><ul><li><code>alt</code> en imágenes.</li><li><code>label</code> en formularios.</li><li><code>title</code> en iframes.</li><li>Texto claro en botones y enlaces.</li></ul></article><article class="info-panel"><h3>Buenas prácticas</h3><pre><code>&lt;label for="email"&gt;Correo&lt;/label&gt;
+&lt;input id="email" type="email"&gt;
+&lt;button type="submit"&gt;Enviar</button&gt;</code></pre><p>Relaciona siempre el <code>label</code> con el campo usando <code>for</code> y <code>id</code>. Así las personas que usan teclado o lector de pantalla entienden mejor el formulario.</p></article></div><div class="callout">♿ <b>Consejo:</b> etiqueta siempre los controles y evita enlaces con texto genérico como “haz clic aquí”. Usa texto descriptivo.</div></div>
+  <div id="html-forms" class="tab-content"><div class="content-grid"><article class="info-panel"><h3>Formularios</h3><pre><code>&lt;form&gt;
+  &lt;label for="nombre"&gt;Nombre&lt;/label&gt;
+  &lt;input id="nombre" type="text" placeholder="Escribe tu nombre"&gt;
+  &lt;label for="mensaje"&gt;Mensaje&lt;/label&gt;
+  &lt;textarea id="mensaje" placeholder="Tu mensaje aquí"&gt;&lt;/textarea&gt;
+  &lt;button type="submit"&gt;Enviar&lt;/button&gt;
+&lt;/form&gt;</code></pre><p><code>label</code> identifica el campo; <code>input</code> recibe datos; <code>button</code> permite una acción. Otros elementos: <code>select</code>, <code>option</code>, <code>textarea</code>.</p></article><article class="interactive-form"><label>Nombre<input placeholder="Escribe aquí"></label><label>Curso<select><option>10-01</option><option>10-02</option></select></label><label>Mensaje<textarea placeholder="Tu mensaje"></textarea></label><button class="primary" onclick="showToast('Formulario de práctica: ¡funciona!')">Probar botón</button></article></div></div>
+  <div id="html-tables" class="tab-content"><div class="content-grid"><article class="info-panel"><h3>Tablas</h3><pre><code>&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th&gt;Producto&lt;/th&gt;&lt;th&gt;Precio&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;Tenis&lt;/td&gt;&lt;td&gt;$120&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre><p><code>th</code> representa encabezados; <code>td</code> celdas. <code>colspan</code> y <code>rowspan</code> permiten combinar celdas.</p></article><article class="info-panel"><h3>Ejemplo</h3><table><thead><tr><th>Producto</th><th>Precio</th><th>Stock</th></tr></thead><tbody><tr><td>Tenis</td><td>$120</td><td>8</td></tr><tr><td>Camiseta</td><td>$45</td><td>14</td></tr><tr><td>Gorra</td><td>$25</td><td>22</td></tr></tbody></table></article></div></div>
+  <button class="btn primary" id="finishHtml">✓ Marcar HTML5 como estudiado</button>
+</section>
+
+
+<section id="vscode" class="page">
+  <div class="heading"><span class="eyebrow">TALLER GUIADO · VISUAL STUDIO CODE</span><h2>Crear tu primera página desde cero</h2><p>No copies y pegues sin entender. Sigue los pasos, crea los archivos tú mismo y prueba cada cambio antes de continuar.</p></div>
+  <div class="lesson-banner vscode-banner"><div><b>🎯 META</b><h3>Terminar con una carpeta web organizada.</h3><p>Al final tendrás <code>index.html</code>, <code>style.css</code> y una página que se abre en el navegador. Cada paso incluye qué hacer, qué escribir y qué deberías observar.</p></div><div class="house">⌨️</div></div>
+  <div class="vs-progress"><span>01 Carpeta</span><b>→</b><span>02 HTML</span><b>→</b><span>03 CSS</span><b>→</b><span>04 Enlazar</span><b>→</b><span>05 Probar</span></div>
+  <div class="vs-grid">
+    <article class="vs-card"><div class="vs-num">01</div><h3>Crear la carpeta</h3><p><strong>1.</strong> Abre Visual Studio Code.<br><strong>2.</strong> Selecciona <b>File → Open Folder</b>.<br><strong>3.</strong> Crea una carpeta llamada <code>mi-web</code> y ábrela.</p><div class="vs-note">👀 Debes ver el nombre de la carpeta en el panel Explorer.</div></article>
+    <article class="vs-card"><div class="vs-num">02</div><h3>Crear index.html</h3><p><strong>1.</strong> En Explorer pulsa <b>New File</b>.<br><strong>2.</strong> Escribe exactamente <code>index.html</code>.<br><strong>3.</strong> Escribe <code>!</code> y presiona <b>Enter</b> para generar la estructura.</p><pre><code>&lt;!doctype html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;...&lt;/head&gt;
+&lt;body&gt;...&lt;/body&gt;
+&lt;/html&gt;</code></pre></article>
+    <article class="vs-card"><div class="vs-num">03</div><h3>Escribir el contenido</h3><p>Dentro de <code>body</code>, escribe una estructura semántica. No memorices: piensa qué función cumple cada zona.</p><pre><code>&lt;header&gt;
+  &lt;h1&gt;Mi página&lt;/h1&gt;
+&lt;/header&gt;
+&lt;main&gt;
+  &lt;section&gt;
+    &lt;h2&gt;Mi contenido&lt;/h2&gt;
+    &lt;p&gt;Mi primer texto web.&lt;/p&gt;
+  &lt;/section&gt;
+&lt;/main&gt;
+&lt;footer&gt;Mi sitio&lt;/footer&gt;</code></pre></article>
+    <article class="vs-card"><div class="vs-num">04</div><h3>Crear style.css</h3><p><strong>1.</strong> Crea otro archivo llamado <code>style.css</code>.<br><strong>2.</strong> Escribe una regla sencilla.<br><strong>3.</strong> Guarda con <kbd>Ctrl + S</kbd>.</p><pre><code>body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f4f6fb;
+}</code></pre></article>
+    <article class="vs-card"><div class="vs-num">05</div><h3>Conectar HTML + CSS</h3><p>Regresa a <code>index.html</code>. Dentro de <code>head</code> agrega:</p><pre><code>&lt;link rel="stylesheet" href="style.css"&gt;</code></pre><div class="vs-note">💡 Si el nombre del archivo no coincide, el CSS no se aplicará.</div></article>
+    <article class="vs-card"><div class="vs-num">06</div><h3>Probar en el navegador</h3><p>Guarda ambos archivos. Abre <code>index.html</code> en el navegador o usa <b>Live Server</b> si está instalado.</p><div class="vs-checks"><label><input type="checkbox" data-vs="folder"> Creé la carpeta</label><label><input type="checkbox" data-vs="html"> Creé index.html</label><label><input type="checkbox" data-vs="css"> Creé style.css</label><label><input type="checkbox" data-vs="link"> Conecté el CSS</label><label><input type="checkbox" data-vs="test"> Probé en navegador</label></div></article>
+  </div>
+  <div class="vs-exercise"><span class="eyebrow">✍️ MINI RETO ESCRITO</span><h3>Ahora hazlo sin mirar el ejemplo.</h3><p>En tu propia carpeta crea una página llamada <strong>Mi sitio</strong> con <code>header</code>, <code>nav</code>, <code>main</code>, una <code>section</code> y <code>footer</code>. Después agrega un archivo CSS y cambia al menos el color, el tamaño del título y el fondo.</p><button class="btn primary" id="finishVs">Marcar taller como terminado ✓</button><div id="vsMsg" class="message"></div></div>
+
+<div class="topic-quiz" data-quiz="html">
+  <div class="quiz-head"><span>🧠 QUIZ HTML5</span><b>5 preguntas · aprende de tus errores</b></div>
+  <p class="quiz-instruction">Selecciona una respuesta en cada pregunta. Después pulsa <strong>Comprobar quiz</strong>.</p>
+  <div class="quiz-q"><b>1. ¿Qué etiqueta representa el contenido principal?</b><button class="quiz-option" data-answer="main">main</button><button class="quiz-option" data-answer="div">div</button><button class="quiz-option" data-answer="head">head</button></div>
+  <div class="quiz-q"><b>2. ¿Qué atributo necesita una imagen para describir su contenido?</b><button class="quiz-option" data-answer="alt">alt</button><button class="quiz-option" data-answer="src">src</button><button class="quiz-option" data-answer="href">href</button></div>
+  <div class="quiz-q"><b>3. ¿Cuál etiqueta pertenece a la estructura semántica?</b><button class="quiz-option" data-answer="section">section</button><button class="quiz-option" data-answer="spanx">span</button><button class="quiz-option" data-answer="brx">br</button></div>
+  <div class="quiz-q"><b>4. ¿Dónde se coloca normalmente el enlace al CSS externo?</b><button class="quiz-option" data-answer="head">Dentro de head</button><button class="quiz-option" data-answer="footer">Dentro de footer</button><button class="quiz-option" data-answer="img">Dentro de img</button></div>
+  <div class="quiz-q"><b>5. ¿Qué etiqueta crea un enlace?</b><button class="quiz-option" data-answer="a">a</button><button class="quiz-option" data-answer="linkx">link</button><button class="quiz-option" data-answer="buttonx">button</button></div>
+  <button class="btn primary check-quiz" data-quiz="html">Comprobar quiz</button><div class="quiz-result" id="quizResult-html"></div>
+</div>
+</section>
+
+<!-- CSS -->
+<section id="css" class="page">
+  <div class="heading"><span class="eyebrow">MÓDULO 02 · CSS</span><h2>Haz que tu página cobre vida</h2><p>CSS controla colores, tipografías, tamaños, espacios y presentación visual.</p></div>
+  <div class="css-model"><div><span class="eyebrow">SINTAXIS</span><h3>Selector → Propiedad → Valor</h3><pre><code>.titulo {
+  color: #635bff;
+  font-size: 32px;
+}</code></pre></div><div class="syntax-preview"><h3 id="liveTitle">Mi página web</h3><p>El estilo cambia en tiempo real.</p></div></div>
+  <div class="css-reference">
+    <span class="eyebrow">MAPA CSS · DE LO SIMPLE A LO PROFESIONAL</span>
+    <h3>¿Qué debes pensar antes de escribir una regla?</h3>
+    <div class="css-reference-grid">
+      <div><b>1 · Selector</b><p>¿Qué elemento quiero cambiar?</p><code>.card</code></div>
+      <div><b>2 · Propiedad</b><p>¿Qué aspecto quiero modificar?</p><code>color</code></div>
+      <div><b>3 · Valor</b><p>¿Qué resultado quiero?</p><code>#635bff</code></div>
+      <div><b>4 · Contexto</b><p>¿La regla afecta a muchos o a uno?</p><code>clase / ID</code></div>
+      <div><b>5 · Caja</b><p>¿Necesito espacio interno o externo?</p><code>padding / margin</code></div>
+      <div><b>6 · Layout</b><p>¿Cómo se organizan los hijos?</p><code>display:flex</code></div>
+    </div>
+  </div>
+  <div class="module-stepper" id="cssStepper">
+    <div class="step-header"><b>Paso a paso</b><span id="cssStepProgress">Paso 1 de 6</span></div>
+    <div class="step-buttons">
+      <button class="step-button active" data-step-index="0">Selectores</button>
+      <button class="step-button" data-step-index="1">Texto</button>
+      <button class="step-button" data-step-index="2">Box Model</button>
+      <button class="step-button" data-step-index="3">Fondos</button>
+      <button class="step-button" data-step-index="4">Responsive</button>
+      <button class="step-button" data-step-index="5">CSS externo</button>
+    </div>
+    <div class="step-panel"><p id="cssStepInfo">Aprende primero a elegir selectores adecuados para aplicar estilos de forma clara.</p></div>
+    <div class="step-actions"><button class="btn small" id="cssPrevStep">Anterior</button><button class="btn small primary" id="cssNextStep">Siguiente</button></div>
+  </div>
+  <div id="css-selectors" class="tab-content active"><div id="selectorPlayground" class="selector-playground">
+  <div class="selector-playground-head">
+    <div><span class="eyebrow">INTERACTIVO · SELECTORES</span><h3>Etiqueta vs. clase vs. ID</h3><p>Haz clic en cada selector y observa qué elementos reciben el estilo.</p></div>
+    <div class="specificity-pill" id="specificityValue">Especificidad: 1</div>
+  </div>
+  <div class="selector-choice-row">
+    <button class="selector-type-btn active" data-selector-type="tag">Etiqueta <code>p</code></button>
+    <button class="selector-type-btn" data-selector-type="class">Clase <code>.producto</code></button>
+    <button class="selector-type-btn" data-selector-type="id">ID <code>#destacado</code></button>
+  </div>
+  <div class="selector-live">
+    <div class="selector-code"><span>CSS aplicado:</span><code id="selectorLiveCode">p { color: #635bff; }</code></div>
+    <div class="selector-targets" id="selectorTargets">
+      <p class="producto">Párrafo 1 · tiene clase producto</p>
+      <p class="producto">Párrafo 2 · tiene clase producto</p>
+      <p id="destacado" class="producto">Párrafo 3 · tiene clase + ID</p>
+    </div>
+  </div>
+  <div class="selector-explanation" id="selectorExplanation"><b>Etiqueta</b><p>Selecciona todos los elementos <code>p</code>. Es útil para reglas generales.</p><strong>Especificidad: 1</strong></div>
+</div>
+<div class="selector-grid"><article><code>p { }</code><h3>Etiqueta</h3><p>Selecciona todos los elementos de ese tipo.</p></article><article><code>.card { }</code><h3>Clase</h3><p>Permite aplicar un estilo a varios elementos.</p></article><article><code>#principal { }</code><h3>ID</h3><p>Identifica un elemento específico dentro del documento.</p></article></div><div class="selector-game"><h3>¿Qué selector usarías?</h3><p>Quieres aplicar el mismo estilo a todas las tarjetas de productos.</p><button class="choice" data-correct="true">.producto</button><button class="choice">#producto</button><button class="choice">producto</button><div class="message"></div></div></div>
+  <div id="css-text" class="tab-content"><div class="css-lab"><div class="controls-panel"><label>Color<input type="color" id="colorControl" value="#635bff"></label><label>Tamaño <output id="fontOut">32px</output><input type="range" id="fontControl" min="18" max="60" value="32"></label><label>Alineación<select id="alignControl"><option>left</option><option>center</option><option>right</option></select></label><label>Peso<select id="weightControl"><option>400</option><option>500</option><option>700</option></select></label></div><div class="live-card"><h2 id="cssLive">Diseño Web</h2><p>Cambia los controles y observa cómo CSS transforma la presentación.</p></div></div>
+    <div class="mini-lab"><h3>MiniLab CSS</h3><div class="mini-lab-grid"><div class="controls-panel"><label>Fondo<input type="color" id="miniBg" value="#635bff"></label><label>Texto<input type="color" id="miniColor" value="#ffffff"></label><label>Radio <output id="miniRadiusOut">14px</output><input type="range" id="miniRadius" min="0" max="30" value="14"></label><label>Padding <output id="miniPaddingOut">16px</output><input type="range" id="miniPadding" min="8" max="32" value="16"></label><label>Sombra <output id="miniShadowOut">10</output><input type="range" id="miniShadow" min="0" max="20" value="10"></label></div><div class="mini-preview"><div class="preview-label">VISTA PREVIA</div><button id="miniButton" class="mini-button">Enviar mensaje</button><pre><code id="miniCode"></code></pre></div></div><div class="mini-lab-guide"><h4>Guía paso a paso</h4><ol><li>Elige un color de fondo llamativo para el botón.</li><li>Incrementa el <strong>padding</strong> y redondea las esquinas con <strong>border-radius</strong>.</li><li>Ajusta la <strong>sombra</strong> para darle profundidad.</li><li>Fíjate en el código CSS que se genera y cópialo para usarlo en tu proyecto.</li></ol><button id="miniComplete" class="btn small primary">Marcar mini-lab como completado</button><div id="miniLabStatus" class="mini-lab-status"></div></div><p class="mini-lab-tip">Ajusta los controles para ver cómo cambian el botón y el código CSS generado al instante.</p></div>
+  </div>
+  <div id="css-box" class="tab-content"><div class="box-model"><div class="margin"><span>margin</span><div class="border"><span>border</span><div class="padding"><span>padding</span><div class="content">CONTENIDO</div></div></div></div></div><div class="two-col"><article class="info-panel"><h3>Margin vs. padding</h3><p><strong>margin</strong> crea espacio fuera de la caja. <strong>padding</strong> crea espacio entre el contenido y el borde.</p></article><article class="controls-panel"><label>Margin <output id="marginOut">20px</output><input id="marginControl" type="range" min="0" max="50" value="20"></label><label>Padding <output id="paddingOut">20px</output><input id="paddingControl" type="range" min="0" max="50" value="20"></label></article></div></div>
+  <div id="css-background" class="tab-content"><div class="palette"><div class="swatch" style="background:#171b2e">#171b2e</div><div class="swatch" style="background:#635bff">#635bff</div><div class="swatch" style="background:#20b6c7">#20b6c7</div><div class="swatch" style="background:#ef8d56">#ef8d56</div></div><div class="info-panel"><h3>Buenas decisiones visuales</h3><ul><li>Usa una jerarquía clara.</li><li>No uses demasiados colores.</li><li>Cuida el contraste y la legibilidad.</li><li>Usa espacios para evitar una interfaz saturada.</li><li>Piensa en la repetición de estilos para que tu sitio se vea cohesivo.</li></ul></div></div>
+  <div id="css-responsive" class="tab-content"><div class="content-grid"><article class="info-panel"><h3>Diseño responsive</h3><p>Una página moderna funciona bien en escritorio, tablet y celular. Usa reglas que cambien según el ancho de pantalla.</p><pre><code>@media (max-width: 768px) {
+  .cards {
+    flex-direction: column;
+  }
+}</code></pre><p>Esta regla hace que las tarjetas pasen de fila a columna cuando la pantalla es más angosta.</p></article><article class="info-panel"><h3>Flexbox y responsive</h3><p>Flexbox ayuda a crear diseños que se ajustan. En móviles, combina <code>flex-wrap</code> con <code>min-width</code> para que las tarjetas no se reduzcan demasiado.</p></article></div>
+    <div class="callout">📱 <b>Regla útil:</b> piensa primero en el móvil y luego añade mejoras para pantallas más amplias.</div>
+  </div>
+  <div id="css-structure" class="tab-content"><div class="content-grid"><article class="info-panel"><h3>CSS externo</h3><pre><code>&lt;head&gt;
+  &lt;link rel="stylesheet"
+        href="style.css"&gt;
+&lt;/head&gt;</code></pre><p>Separar estructura y estilos hace que el proyecto sea más ordenado y fácil de mantener.</p></article><article class="info-panel"><h3>Flujo recomendado</h3><div class="steps"><span>01 HTML</span><span>02 CSS</span><span>03 Flexbox</span><span>04 Revisión</span><span>05 Proyecto</span></div></article></div></div>
+  <button class="btn primary" id="finishCss">✓ ✓ Marcar CSS como estudiado (opcional)</button>
+
+<div class="topic-quiz" data-quiz="css">
+  <div class="quiz-head"><span>🎨 QUIZ CSS</span><b>5 preguntas · relaciona propiedad y propósito</b></div>
+  <p class="quiz-instruction">No adivines: piensa qué problema visual resuelve cada propiedad.</p>
+  <div class="quiz-q"><b>1. ¿Qué propiedad cambia el color del texto?</b><button class="quiz-option" data-answer="color">color</button><button class="quiz-option" data-answer="bg">background</button><button class="quiz-option" data-answer="size">font-size</button></div>
+  <div class="quiz-q"><b>2. ¿Qué propiedad crea espacio interior?</b><button class="quiz-option" data-answer="padding">padding</button><button class="quiz-option" data-answer="margin">margin</button><button class="quiz-option" data-answer="gapx">gap</button></div>
+  <div class="quiz-q"><b>3. ¿Qué selector selecciona una clase llamada card?</b><button class="quiz-option" data-answer="class">.card</button><button class="quiz-option" data-answer="id">#card</button><button class="quiz-option" data-answer="tag">card</button></div>
+  <div class="quiz-q"><b>4. ¿Qué propiedad cambia el tamaño de la letra?</b><button class="quiz-option" data-answer="font-size">font-size</button><button class="quiz-option" data-answer="font-weightx">font-weight</button><button class="quiz-option" data-answer="line">line-height</button></div>
+  <div class="quiz-q"><b>5. ¿Qué propiedad sirve para el espacio entre hijos de un contenedor Flexbox?</b><button class="quiz-option" data-answer="gap">gap</button><button class="quiz-option" data-answer="paddingx">padding</button><button class="quiz-option" data-answer="border">border</button></div>
+  <button class="btn primary check-quiz" data-quiz="css">Comprobar quiz</button><div class="quiz-result" id="quizResult-css"></div>
+</div>
+</section>
+
+<!-- FLEXBOX -->
+<section id="flex" class="page">
+  <div class="fx17-hero">
+    <div>
+      <span class="fx17-kicker">⭐ MÓDULO 03 · FLEXBOX</span>
+      <h2>Flexbox = tu superpoder</h2>
+      <p>Aprende <b>haciendo</b>: escribe CSS, ejecútalo, rompe el diseño, corrígelo y descubre por qué funciona.</p>
+      <div class="fx17-route"><span>CONTENEDOR</span><b>→</b><span>EJES</span><b>→</b><span>ESPACIADO</span><b>→</b><span>RESPONSIVE</span></div>
+    </div>
+    <div class="fx17-badge">FLEX<br><strong>⚡</strong></div>
+  </div>
+
+  <div class="fx17-tabs" id="fx17Tabs" role="tablist">
+    <button type="button" class="fx17-tab is-active" data-tab="fundamentos">🧠 Fundamentos</button>
+    <button type="button" class="fx17-tab" data-tab="propiedades">📚 Propiedades</button>
+    <button type="button" class="fx17-tab" data-tab="playground">🎛️ Playground</button>
+    <button type="button" class="fx17-tab" data-tab="laboratorios">🧪 Laboratorios</button>
+    <button type="button" class="fx17-tab" data-tab="retos">🏆 Retos</button>
+  </div>
+
+  <div class="fx17-panel is-active" data-panel="fundamentos">
+    <div class="fx17-heading"><span>01</span><div><h3>La idea que debes dominar</h3><p>Flexbox organiza elementos dentro de un contenedor y trabaja con dos ejes.</p></div></div>
+    <div class="fx17-cards4">
+      <article><b class="fx17-icon">📦</b><h4>Contenedor</h4><p>El elemento que recibe <code>display: flex</code>. Sus hijos directos entran al sistema Flexbox.</p><pre><code>.menu { display: flex; }</code></pre></article>
+      <article><b class="fx17-icon">👶</b><h4>Hijos</h4><p>Son los elementos directamente dentro del contenedor. Sus posiciones pueden cambiar sin usar <code>position</code>.</p><pre><code>&lt;nav&gt;
+  &lt;a&gt;Inicio&lt;/a&gt;
+  &lt;a&gt;Cursos&lt;/a&gt;
+&lt;/nav&gt;</code></pre></article>
+      <article><b class="fx17-icon">↔️</b><h4>Eje principal</h4><p><code>flex-direction</code> decide si el eje principal es horizontal (<code>row</code>) o vertical (<code>column</code>).</p></article>
+      <article><b class="fx17-icon">↕️</b><h4>Eje transversal</h4><p>Es perpendicular al principal. <code>align-items</code> trabaja principalmente sobre este eje.</p></article>
+    </div>
+    <div class="fx17-tip">💡 <b>Regla mental:</b> primero decide la dirección → después distribuye con <code>justify-content</code> → finalmente alinea con <code>align-items</code>.</div>
+  </div>
+
+  <div class="fx17-panel" data-panel="propiedades">
+    <div class="fx17-heading"><span>02</span><div><h3>Propiedades, una por una</h3><p>No las memorices: cambia valores y observa qué propiedad controla cada cosa.</p></div></div>
+    <div class="fx17-prop-grid">
+      <article><code>display: flex</code><small>CONTENEDOR</small><h4>Activa Flexbox</h4><p>Convierte el elemento en contenedor flexible.</p><pre><code>.contenedor {
+  display: flex;
+}</code></pre></article>
+      <article><code>flex-direction</code><small>CONTENEDOR</small><h4>Define la dirección</h4><p><b>row</b>, <b>row-reverse</b>, <b>column</b>, <b>column-reverse</b>.</p><pre><code>flex-direction: column;</code></pre></article>
+      <article><code>justify-content</code><small>EJE PRINCIPAL</small><h4>Distribuye</h4><p><b>start · center · end · space-between · space-around · space-evenly</b>.</p><pre><code>justify-content: space-between;</code></pre></article>
+      <article><code>align-items</code><small>EJE TRANSVERSAL</small><h4>Alinea los hijos</h4><p><b>stretch · start · center · end</b>. Muy usado para centrar contenido.</p><pre><code>align-items: center;</code></pre></article>
+      <article><code>flex-wrap</code><small>CONTENEDOR</small><h4>Permite varias líneas</h4><p><b>nowrap</b> mantiene una línea; <b>wrap</b> permite nuevas filas.</p><pre><code>flex-wrap: wrap;</code></pre></article>
+      <article><code>align-content</code><small>VARIAS FILAS</small><h4>Alinea las líneas</h4><p>Solo se nota cuando hay varias líneas con <code>flex-wrap</code>.</p><pre><code>align-content: center;</code></pre></article>
+      <article><code>gap</code><small>CONTENEDOR</small><h4>Separa elementos</h4><p>Controla el espacio entre hijos. También existen <code>row-gap</code> y <code>column-gap</code>.</p><pre><code>gap: 20px;</code></pre></article>
+      <article><code>flex-flow</code><small>ATAJO</small><h4>Dirección + wrap</h4><p>Atajo para <code>flex-direction</code> y <code>flex-wrap</code>.</p><pre><code>flex-flow: row wrap;</code></pre></article>
+      <article><code>order</code><small>HIJO</small><h4>Cambia el orden</h4><p>Modifica el orden visual de un hijo.</p><pre><code>.destacado { order: -1; }</code></pre></article>
+      <article><code>flex-grow</code><small>HIJO</small><h4>Puede crecer</h4><p>Indica cuánto espacio libre puede ocupar.</p><pre><code>.item { flex-grow: 1; }</code></pre></article>
+      <article><code>flex-shrink</code><small>HIJO</small><h4>Puede encogerse</h4><p>Controla cuánto puede reducirse cuando falta espacio.</p><pre><code>.item { flex-shrink: 1; }</code></pre></article>
+      <article><code>flex-basis</code><small>HIJO</small><h4>Tamaño base</h4><p>Establece el tamaño inicial antes de repartir el espacio.</p><pre><code>.item { flex-basis: 200px; }</code></pre></article>
+    </div>
+  </div>
+
+  <div class="fx17-panel" data-panel="playground">
+    <div class="fx17-heading"><span>03</span><div><h3>Playground · experimenta sin miedo</h3><p>Modifica las propiedades y mira el resultado en tiempo real.</p></div></div>
+    <div class="fx17-play">
+      <div class="fx17-preview"><div class="fx17-preview-top">👀 RESULTADO <span>● EN VIVO</span></div><div id="fx17Canvas" class="fx17-canvas"><div>A</div><div>B</div><div>C</div><div>D</div><div>E</div><div>F</div></div></div>
+      <div class="fx17-controls">
+        <label>flex-direction<select id="fx17Direction"><option>row</option><option>row-reverse</option><option>column</option><option>column-reverse</option></select></label>
+        <label>justify-content<select id="fx17Justify"><option>flex-start</option><option>center</option><option>flex-end</option><option>space-between</option><option>space-around</option><option>space-evenly</option></select></label>
+        <label>align-items<select id="fx17Align"><option>stretch</option><option>flex-start</option><option>center</option><option>flex-end</option></select></label>
+        <label>flex-wrap<select id="fx17Wrap"><option>nowrap</option><option>wrap</option><option>wrap-reverse</option></select></label>
+        <label>gap <input id="fx17Gap" type="range" min="0" max="50" value="16"><output id="fx17GapOut">16px</output></label>
+        <pre id="fx17Code"></pre>
+        <button type="button" id="fx17Reset">↩ Restaurar</button>
+      </div>
+    </div>
+    <div class="fx17-tip">🔎 <b>Prueba esto:</b> usa <code>wrap</code>, agrega varios elementos y luego compara <code>align-items</code> con <code>align-content</code>. ¿Qué cambia?</div>
+  </div>
+
+  <div class="fx17-panel" data-panel="laboratorios">
+    <div class="fx17-heading"><span>04</span><div><h3>Laboratorios · escribe código real</h3><p>Aquí ya no solo miras ejemplos. <b>Escribe tu CSS y ejecútalo.</b></p></div></div>
+    <div class="fx17-lab-nav" id="fx17LabNav">
+      <button type="button" class="is-active" data-lab="nav">🧭 Navegación</button>
+      <button type="button" data-lab="cards">🃏 Tarjetas</button>
+      <button type="button" data-lab="hero">🦸 Hero</button>
+      <button type="button" data-lab="responsive">📱 Responsive</button>
+    </div>
+    <div id="fx17Lab"></div>
+  </div>
+
+  <div class="fx17-panel" data-panel="retos">
+    <div class="fx17-heading"><span>05</span><div><h3>Retos · piensa como desarrollador</h3><p>Escribe, prueba, rompe y corrige. <b>Ningún reto bloquea el contenido.</b></p></div></div>
+    <div class="fx17-challenge-grid" id="fx17Challenges"></div>
+  </div>
+</section>
+
+<section id="goodPractices" class="page">
+  <div class="heading"><span class="eyebrow">MÓDULO 04 · BUENAS PRÁCTICAS</span>
+  <h2>Haz que tu código sea fácil de entender, mantener y mejorar</h2>
+  <p>No se trata de memorizar reglas: vas a aprender a tomar mejores decisiones mientras construyes páginas reales.</p></div>
+  <div class="bp-hero"><div><span class="bp-kicker">🧠 PENSAR COMO DESARROLLADOR</span>
+    <h3>Un sitio puede funcionar y aun así estar mal construido.</h3>
+    <p>Aprende a escribir HTML semántico, CSS ordenado, interfaces accesibles y diseños que funcionen en celular, tablet y computador.</p></div><div class="bp-emoji">✨</div></div>
+  <div class="bp-tabs" id="bpTabs">
+    <button class="bp-tab active" data-bptab="names">🏷️ Nombres</button><button class="bp-tab" data-bptab="semantic">🧩 HTML semántico</button>
+    <button class="bp-tab" data-bptab="css">🎨 CSS limpio</button><button class="bp-tab" data-bptab="accessibility">♿ Accesibilidad</button><button class="bp-tab" data-bptab="responsive">📱 Responsive</button>
+  </div>
+  <div class="bp-content" id="bpContent"></div>
+  <div class="bp-practice"><div class="bp-practice-head"><div><span class="bp-kicker">🛠️ LABORATORIO</span><h3>¿Puedes mejorar este código?</h3></div><span class="bp-level">Nivel: básico → intermedio</span></div>
+    <p>Modifica el HTML y CSS. Pulsa <b>Ejecutar</b> para comprobar tu resultado.</p>
+    <div class="bp-editor-grid"><div class="v6-panel"><div class="v6-paneltop"><span>⌨️ Código</span><span>HTML + CSS</span></div>
+      <textarea id="bpEditor" class="v6-editor"><style>
+.rojo-grande { color: red; font-size: 28px; }
+</style>
+<div class="rojo-grande"><h2>Producto destacado</h2><p>Tenemos una promoción especial.</p></div></textarea>
+      <div class="v6-actions"><button class="v6-btn v6-primary" id="bpRun">▶ Ejecutar</button><button class="v6-btn v6-hint" id="bpHint">💡 Pista</button><button class="v6-btn v6-reset" id="bpReset">↩ Restaurar</button></div>
+      <div id="bpFeedback" class="v6-feedback"></div></div>
+      <div class="v6-panel"><div class="v6-paneltop"><span>👀 Vista previa</span><span>RESULTADO</span></div><div id="bpPreview" class="v6-preview"></div></div></div>
+  </div>
+  <div class="bp-checklist"><h3>🔍 Checklist de un desarrollador</h3><p>Antes de entregar una página, revisa estos puntos:</p>
+    <label><input type="checkbox"> Mis clases tienen nombres claros.</label><label><input type="checkbox"> Uso etiquetas HTML según su significado.</label>
+    <label><input type="checkbox"> Mi CSS está organizado y no repite reglas innecesariamente.</label><label><input type="checkbox"> Los botones y formularios son fáciles de entender.</label>
+    <label><input type="checkbox"> Mi página funciona en una pantalla pequeña.</label><label><input type="checkbox"> Revisé el resultado después de hacer cambios.</label>
+  </div>
+  <div class="bp-real"><span class="bp-kicker">💼 EN UN PROYECTO REAL</span><h3>¿Por qué importa?</h3>
+    <div class="bp-real-grid"><div><b>👥 Trabajo en equipo</b><p>Otra persona puede entender tus clases y modificar tu código.</p></div>
+    <div><b>🐛 Menos errores</b><p>Un código ordenado hace más fácil encontrar y corregir problemas.</p></div>
+    <div><b>📈 Escalabilidad</b><p>Tu proyecto puede crecer sin convertirse en estilos imposibles de mantener.</p></div>
+    <div><b>❤️ Usuarios</b><p>La accesibilidad y el responsive hacen que más personas puedan usar tu página.</p></div></div>
+  </div>
+  <button class="btn primary" id="finishGoodPractices">✓ Marcar Buenas prácticas como estudiado (opcional)</button>
+</section>
+
+<!-- PRACTICE -->
+<section id="practice" class="page">
+  <div class="heading"><span class="eyebrow">MÓDULO 04 · LABORATORIO DE CÓDIGO</span><h2>Escribe. Ejecuta. Rompe. Corrige. 🚀</h2><p>Aquí no tienes que imaginar el resultado: escribe HTML y CSS, ejecuta tu código y observa el cambio inmediatamente.</p></div>
+  <div class="code-lab-hero"><div><span class="eyebrow">👨‍💻 MODO PROGRAMADOR</span><h3>Tu navegador es tu laboratorio.</h3><p>Prueba una propiedad a la vez. Cambia <code>display:flex</code>, <code>justify-content</code>, <code>align-items</code>, <code>gap</code> y <code>flex-wrap</code>. Después explica qué cambió.</p></div><div class="lab-bot" aria-hidden="true">🤖</div></div>
+  <div class="code-challenges">
+    <button class="code-challenge active" data-challenge="nav"><b>01 · Menú</b><small>Organiza el menú con Flexbox</small></button>
+    <button class="code-challenge" data-challenge="cards"><b>02 · Tarjetas</b><small>Haz que se adapten con wrap</small></button>
+    <button class="code-challenge" data-challenge="center"><b>03 · Centrar</b><small>Domina los dos ejes</small></button>
+    <button class="code-challenge" data-challenge="hero"><b>04 · Hero</b><small>Texto + imagen en una fila</small></button>
+  </div>
+  <div class="coding-workbench">
+    <div class="coding-instructions"><span class="eyebrow">MISIÓN</span><h3 id="challengeTitle">Convierte este menú en una barra horizontal.</h3><p id="challengeText">El contenedor <code>.menu</code> debe usar Flexbox. Separa los enlaces y céntralos verticalmente.</p><div class="hint-box"><b>💡 Pista</b><span id="challengeHint">Prueba <code>display: flex</code>, <code>justify-content</code>, <code>align-items</code> y <code>gap</code>.</span></div><button id="checkChallenge" class="btn primary">✓ Comprobar desafío</button><div id="challengeFeedback" class="message"></div></div>
+    <div class="code-editors">
+      <div class="mini-editor"><div class="editor-head"><b>HTML</b><button id="resetLabHtml">Restablecer</button></div><textarea id="labHtml" spellcheck="false"></textarea></div>
+      <div class="mini-editor"><div class="editor-head"><b>CSS</b><button id="resetLabCss">Restablecer</button></div><textarea id="labCss" spellcheck="false"></textarea></div>
+    </div>
+    <div class="live-lab"><div class="preview-label">VISTA PREVIA <span>● EN VIVO</span></div><iframe id="labFrame" title="Laboratorio de código"></iframe></div>
+  </div>
+  <div class="reflection-card"><span class="eyebrow">🧠 PIENSA COMO DESARROLLADOR</span><h3>Después de probar, escribe tu explicación.</h3><textarea id="labReflection" placeholder="Ejemplo: Usé display:flex en .menu porque necesito organizar sus enlaces en una sola fila..."></textarea><button id="saveLabReflection" class="btn dark">💾 Guardar reflexión</button><div id="labSaveMsg" class="message"></div></div>
+  <div id="practiceList"></div>
+  <button id="finishPractice" class="btn primary">✓ Finalizar prácticas</button>
+  <div id="practiceMsg" class="message"></div>
+</section>
+
+<!-- REAL WEB OBSERVATORY -->
+<section id="webExamples" class="page">
+  <div class="heading"><span class="eyebrow">MÓDULO EXTRA · OBSERVATORIO WEB</span><h2>¿Dónde ves Flexbox en páginas reales?</h2><p>Observa patrones de interfaces conocidas. No copies: identifica qué grupos de elementos podrían organizarse con Flexbox y luego construye tu propia versión.</p></div>
+  <div class="real-web-note"><b>🔎 Regla de oro:</b> una página real puede usar varias tecnologías a la vez. Aquí estudiamos <strong>patrones visuales y de layout</strong> que son candidatos naturales para Flexbox, no afirmamos que toda la página esté hecha con Flexbox.</div>
+  <div class="real-web-grid">
+    <article class="real-web-card"><div class="site-shot netflix-shot"><div class="shot-top"><b>N</b><span>Inicio</span><span>Series</span><span>Películas</span><i>⌕</i></div><div class="shot-hero"><small>ORIGINAL</small><h3>Contenido destacado</h3><p>Un hero con texto y acciones.</p><button>Ver ahora</button></div></div><div class="real-web-copy"><span class="tag">STREAMING</span><h3>Patrón: navegación + hero</h3><p><strong>Flexbox:</strong> menú horizontal, distribución del header y grupo de botones.</p><a href="https://www.netflix.com/" target="_blank" rel="noopener">Visitar Netflix ↗</a></div></article>
+    <article class="real-web-card"><div class="site-shot nike-shot"><div class="shot-top"><b>NIKE</b><span>Hombres</span><span>Mujeres</span><span>Niños</span><i>♡</i></div><div class="shoe-hero"><div class="shoe-circle">👟</div><div><small>NUEVO</small><h3>Tu próximo par</h3><button>Comprar</button></div></div></div><div class="real-web-copy"><span class="tag">E-COMMERCE</span><h3>Patrón: producto destacado</h3><p><strong>Flexbox:</strong> logo + navegación, texto + imagen y grupos de botones.</p><a href="https://www.nike.com/" target="_blank" rel="noopener">Visitar Nike ↗</a></div></article>
+    <article class="real-web-card"><div class="site-shot spotify-shot"><div class="shot-top"><b>●</b><span>Inicio</span><span>Buscar</span><span>Tu biblioteca</span></div><div class="music-row"><div class="album">♪</div><div><b>Playlist para programar</b><small>HTML · CSS · Flexbox</small></div><button>▶</button></div><div class="music-row"><div class="album alt">♪</div><div><b>Concentración</b><small>Code mode</small></div><button>▶</button></div></div><div class="real-web-copy"><span class="tag">MÚSICA</span><h3>Patrón: filas de contenido</h3><p><strong>Flexbox:</strong> icono + información + acción alineados en cada fila.</p><a href="https://open.spotify.com/" target="_blank" rel="noopener">Visitar Spotify ↗</a></div></article>
+    <article class="real-web-card"><div class="site-shot airbnb-shot"><div class="shot-top"><b>airbnb</b><span>Alojamientos</span><span>Experiencias</span><i>☰</i></div><div class="search-pills"><span>📍 Lugar</span><span>📅 Fechas</span><span>👥 Huéspedes</span><b>⌕</b></div><div class="stay-cards"><div>🏡<b>Casa</b></div><div>🌴<b>Playa</b></div><div>🏔️<b>Montaña</b></div></div></div><div class="real-web-copy"><span class="tag">SERVICIOS</span><h3>Patrón: buscador + categorías</h3><p><strong>Flexbox:</strong> chips de búsqueda, navegación y tarjetas de categorías.</p><a href="https://www.airbnb.com/" target="_blank" rel="noopener">Visitar Airbnb ↗</a></div></article>
+  </div>
+  <div class="pattern-breakdown"><div><span>01</span><b>Identifica</b><small>¿Qué elementos están juntos?</small></div><div><span>02</span><b>Encuentra el contenedor</b><small>El padre es quien recibe <code>display:flex</code>.</small></div><div><span>03</span><b>Elige el eje</b><small><code>row</code> o <code>column</code>.</small></div><div><span>04</span><b>Alinea y separa</b><small><code>justify-content</code> + <code>align-items</code> + <code>gap</code>.</small></div></div>
+  <div class="lesson-complete-card">
+    <div><span class="eyebrow">ANTES DE CONTINUAR</span><h3>Comprueba que puedes reconocer Flexbox en una interfaz real.</h3><p>Revisa los cuatro patrones anteriores y responde el mini reto. Después podrás continuar al laboratorio.</p></div>
+    <button id="finishWebExamples" class="btn primary">✓ He revisado y comprendido</button>
+  </div>
+  <div id="webExamplesMsg" class="message"></div>
+</section>
+
+<!-- PROJECT -->
+<section id="project" class="page">
+  <div class="heading"><span class="eyebrow">06 · PROYECTO FINAL</span><h2>Construye tu propia página web</h2><p>Aplica HTML semántico, CSS, Flexbox y responsive design en una propuesta propia.</p></div>
+
+  <div class="project-intro">
+    <div>
+      <span class="eyebrow">DESAFÍO</span>
+      <h3>Diseña una página para un tema que te interese.</h3>
+      <p>Elige una idea: tienda de tenis, restaurante, videojuegos, música, tecnología, turismo, gimnasio, cine u otra propuesta aprobada.</p>
+    </div>
+    <div class="project-icon">⌘</div>
+  </div>
+
+  <div class="project-milestones">
+    <article><span>01</span><b>Planifica</b><small>Define público, colores, secciones y contenido.</small></article>
+    <article><span>02</span><b>Construye</b><small>HTML semántico + CSS + Flexbox.</small></article>
+    <article><span>03</span><b>Responsive</b><small>Adapta el diseño para celular.</small></article>
+    <article><span>04</span><b>Explica</b><small>Presenta 3 decisiones de diseño.</small></article>
+  </div>
+
+  <div class="project-rubric">
+    <div>
+      <b>Rúbrica rápida</b>
+      <span>HTML semántico <strong>20</strong></span>
+      <span>CSS visual <strong>20</strong></span>
+      <span>Flexbox real <strong>30</strong></span>
+      <span>Responsive <strong>15</strong></span>
+      <span>Creatividad + explicación <strong>15</strong></span>
+    </div>
+    <div class="flex-required">
+      <b>🔥 REQUISITO FLEXBOX</b>
+      <p>Tu proyecto debe demostrar al menos <strong>3 contenedores flex</strong> y usar <strong>justify-content, align-items y gap</strong>. No vale escribir <code>position</code> para resolver el layout.</p>
+    </div>
+  </div>
+
+  <div class="project-workspace">
+    <div class="project-editor">
+      <div class="editor-head"><b>Tu código HTML</b><button id="resetHtmlEditor">Restablecer</button></div>
+      <textarea id="htmlEditor" spellcheck="false"><!-- PROYECTO FINAL: escribe tu propia página.
+RECUERDA: usa header, nav, main, section y footer.
+NO copies una plantilla completa: construye cada parte y prueba. -->
+
+<header>
+  <nav>
+    <!-- Escribe aquí el nombre de tu proyecto y tus enlaces -->
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <!-- Escribe aquí tu título, descripción, botón e imagen -->
+  </section>
+
+  <section class="cards">
+    <!-- Crea aquí 3 artículos o tarjetas -->
+  </section>
+</main>
+
+<footer>
+  <!-- Escribe aquí la información de tu sitio -->
+</footer></textarea>
+
+      <div class="editor-head"><b>Tu CSS</b><button id="resetCssEditor">Restablecer</button></div>
+      <textarea id="cssEditor" spellcheck="false">/* PROYECTO FINAL
+   META: usa Flexbox para organizar el layout.
+   Debes demostrar display:flex, justify-content,
+   align-items, gap y al menos un media query.
+*/
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6fb;
+  color: #171b2e;
+}
+
+header {
+  padding: 18px 7%;
+  background: #171b2e;
+  color: white;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 50px 7%;
+  background: white;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 20px;
+  padding: 30px 7%;
+}
+
+.card {
+  flex: 1 1 220px;
+  padding: 20px;
+  background: white;
+  border-radius: 16px;
+}
+
+@media (max-width: 700px) {
+  .hero,
+  .cards {
+    flex-direction: column;
+  }
+}</textarea>
+    </div>
+
+    <div class="project-preview">
+      <div class="editor-head"><b>Vista previa</b><span>Se actualiza mientras escribes</span></div>
+      <iframe id="projectFrame" title="Vista previa del proyecto" sandbox="allow-scripts"></iframe>
+    </div>
+  </div>
+
+  <div class="checklist">
+    <h3>✅ Lista de evidencias</h3>
+    <label><input type="checkbox" data-project="semantic"> Usa HTML semántico: header, nav, main, section y footer.</label>
+    <label><input type="checkbox" data-project="css"> Usa CSS para colores, tipografías, espaciado y diseño visual.</label>
+    <label><input type="checkbox" data-project="flex"> Usa display:flex y las propiedades principales de Flexbox.</label>
+    <label><input type="checkbox" data-project="visual"> Presenta jerarquía visual y buena organización.</label>
+    <label><input type="checkbox" data-project="responsive"> Probaste la página en una pantalla pequeña.</label>
+    <label><input type="checkbox" data-project="creativity"> La propuesta tiene contenido propio y explicas tus decisiones de diseño.</label>
+  </div>
+
+  <div class="project-submit">
+    <div><b>¿Terminaste?</b><p>Analiza tu código, marca las evidencias y guarda tu avance.</p></div>
+    <button id="analyzeProject" class="btn ghost">🔎 Analizar mi código</button>
+    <button id="saveProject" class="btn primary">💾 Guardar proyecto</button>
+  </div>
+  <div id="projectAnalysis" class="project-analysis"></div>
+  <div id="projectMsg" class="message"></div>
+</section>
+
+<!-- RESULT -->
+
+<section id="htmlInteractive" class="page">
+  <div class="section-card">
+    <div class="v6-head v6-html">
+      <span class="v6-badge">🧩 INTERACTIVO · HTML SEMÁNTICO</span>
+      <h2>Elige una etiqueta HTML</h2>
+      <p>Haz clic en una etiqueta para descubrir para qué sirve, cuándo usarla y cómo escribirla.</p>
+    </div>
+    <div style="padding:20px 24px 24px">
+      <div class="v8-tag-grid">
+        <button class="v8-tag" data-htmltag="header"><code>&lt;header&gt;</code><span>Encabezado</span></button>
+        <button class="v8-tag" data-htmltag="nav"><code>&lt;nav&gt;</code><span>Navegación</span></button>
+        <button class="v8-tag" data-htmltag="main"><code>&lt;main&gt;</code><span>Contenido principal</span></button>
+        <button class="v8-tag" data-htmltag="section"><code>&lt;section&gt;</code><span>Sección</span></button>
+        <button class="v8-tag" data-htmltag="article"><code>&lt;article&gt;</code><span>Contenido independiente</span></button>
+        <button class="v8-tag" data-htmltag="aside"><code>&lt;aside&gt;</code><span>Contenido complementario</span></button>
+        <button class="v8-tag" data-htmltag="footer"><code>&lt;footer&gt;</code><span>Pie de página</span></button>
+        <button class="v8-tag" data-htmltag="form"><code>&lt;form&gt;</code><span>Formulario</span></button>
+      </div>
+
+      <div id="v8TagInfo" class="v8-info-card">
+        <div class="v8-empty">👆 Selecciona una etiqueta para comenzar.</div>
+      </div>
+
+      <div id="v8TagLab" class="v8-lab hidden">
+        <div>
+          <div class="v6-paneltop">⌨️ Prueba la etiqueta</div>
+          <textarea id="v8TagEditor" class="v6-editor"></textarea>
+          <div class="v6-actions">
+            <button class="v6-btn v6-primary" id="v8RunTag">▶ Ejecutar</button>
+            <button class="v6-btn v6-hint" id="v8HintTag">💡 Pista</button>
+          </div>
+          <div id="v8TagFeedback" class="v6-feedback"></div>
+        </div>
+        <div class="v8-browser">
+          <div class="v8-browserbar"><span></span><span></span><span></span><b>Vista previa</b></div>
+          <div id="v8TagPreview" class="v8-preview"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="result" class="page">
+  <div class="result-card"><div class="trophy">🏆</div><span class="eyebrow">MI AVANCE</span><h2 id="resultTitle">Tu ruta está comenzando.</h2><div class="big-score" id="resultScore">0<small>/100</small></div><p id="resultDescription">Completa los módulos para obtener tu resultado.</p><div class="result-breakdown"><div><b id="rHtml">0%</b><small>HTML5</small></div><div><b id="rCss">0%</b><small>CSS</small></div><div><b id="rFlex">0%</b><small>Flexbox</small></div><div><b id="rGoodPractices">0%</b><small>Buenas prácticas</small></div><div><b id="rPractice">0%</b><small>Prácticas</small></div><div><b id="rProject">0%</b><small>Proyecto</small></div></div><div class="evidence"><b>📸 Evidencia para entregar</b><p>Toma una captura de esta pantalla cuando termines. Si tu docente solicita el código, entrega también tu carpeta del proyecto.</p></div></div>
+</section>
+
+<!-- TEACHER -->
+<section id="teacherDash" class="page">
+  <div class="heading"><span class="eyebrow">PANEL DOCENTE</span><h2>Seguimiento de Grado 10</h2><p>Consulta el avance registrado de tus estudiantes.</p></div>
+  <div class="teacher-metrics"><div><b id="tStudents">0</b><small>Estudiantes</small></div><div><b id="tActive">0</b><small>Con avance</small></div><div><b id="tFinished">0</b><small>Completaron</small></div><div><b id="tAverage">—</b><small>Promedio</small></div></div>
+  <div class="panel-card"><div class="panel-head"><div><b>Avance por módulo</b><small>Promedio del grupo</small></div></div><div id="moduleBars"></div></div>
+  <div class="panel-card"><div class="panel-head"><b>Últimos estudiantes</b><button class="btn small" data-go="teacherStudents">Ver todos →</button></div><div id="recentStudents" class="student-table"></div></div>
+</section>
+
+<section id="teacherStudents" class="page">
+  <div class="heading"><span class="eyebrow">PANEL DOCENTE · ESTUDIANTES</span><h2>Estudiantes</h2><p>Haz clic en un estudiante para ver su avance detallado.</p></div>
+  <div class="toolbar"><input id="studentSearch" placeholder="Buscar por nombre o grupo…"><button id="exportCsv" class="btn dark">⬇ Exportar CSV</button></div>
+  <div class="panel-card"><div id="allStudents" class="student-table"></div></div>
+  <div id="studentDetail" class="student-detail hidden"></div>
+</section>
+
+<section id="teacherReports" class="page">
+  <div class="heading"><span class="eyebrow">PANEL DOCENTE · REPORTES</span><h2>Reporte del curso</h2><p>Resumen para detectar avances, dificultades y estudiantes que necesitan acompañamiento.</p></div>
+  <div class="report-grid"><div class="report-box"><span>HTML5</span><b id="repHtml">0%</b><div class="bar"><i id="repHtmlBar"></i></div></div><div class="report-box"><span>CSS</span><b id="repCss">0%</b><div class="bar"><i id="repCssBar"></i></div></div><div class="report-box"><span>Flexbox</span><b id="repFlex">0%</b><div class="bar"><i id="repFlexBar"></i></div></div><div class="report-box"><span>Buenas prácticas</span><b id="repGoodPractices">0%</b><div class="bar"><i id="repGoodPracticesBar"></i></div></div><div class="report-box"><span>Prácticas</span><b id="repPractice">0%</b><div class="bar"><i id="repPracticeBar"></i></div></div><div class="report-box"><span>Proyecto</span><b id="repProject">0%</b><div class="bar"><i id="repProjectBar"></i></div></div></div>
+  <div class="panel-card"><div class="panel-head"><b>Estudiantes que requieren seguimiento</b></div><div id="needsSupport"></div></div>
+</section>
+
+<section id="teacherSettings" class="page">
+  <div class="heading"><span class="eyebrow">PANEL DOCENTE · CONFIGURACIÓN</span><h2>Configuración</h2><p>Personaliza datos básicos y prepara la conexión a la base de datos.</p></div>
+  <div class="panel-card settings"><label>Nombre de la institución<input id="schoolName" value="Institución Educativa"></label><label>Nombre del docente<input id="teacherName" value="Docente de Tecnología"></label><label>Grupo principal<input id="defaultGroup" value="10°"></label><button id="saveSettings" class="btn primary">Guardar configuración</button><div class="callout">☁️ <b>Modo actual:</b> almacenamiento local. Para que el panel vea datos desde diferentes computadores, configura Supabase siguiendo el README.</div></div>
+</section>
+</main>
+</div>
+</div>
+<script src="config.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
